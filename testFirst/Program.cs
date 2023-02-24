@@ -65,9 +65,13 @@ while (true)
     await page.WaitForTimeoutAsync(1000);
 
     // 使用 type 方法將 AAATest 輸入至 input 中
-    await firstInput.TypeAsync(userid);
-    await page.Keyboard.PressAsync("Control+KeyA");
-    await page.Keyboard.PressAsync("Backspace");
+    /// 回車六次 避免不同os keyboard不同
+    await firstInput.FocusAsync();
+    for( var i = 0 ; i < 6 ; i ++){
+        await page.Keyboard.PressAsync("Backspace");
+    }
+    //await page.Keyboard.PressAsync("Control+KeyA");
+    //await page.Keyboard.PressAsync("Backspace");
     await firstInput.TypeAsync(userid);
     // 等待三秒
 
